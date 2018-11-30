@@ -27,12 +27,12 @@ instance Foldable Levelorder where
         tbf xs = map nodeValue xs ++ tbf (concat (map leftAndRightNodes xs)) where
             nodeValue (LevelO (Node _ a _)) = a
             leftAndRightNodes (LevelO (Node Nil _ Nil)) = []
-            leftAndRightNodes (LevelO (Node Nil _ b))   = [LevelO b]
-            leftAndRightNodes (LevelO (Node a _ Nil))   = [LevelO a]
-            leftAndRightNodes (LevelO (Node a _ b))     = [LevelO a, LevelO b]
+            leftAndRightNodes (LevelO (Node Nil _ a))   = [LevelO a]
+            leftAndRightNodes (LevelO (Node b _ Nil))   = [LevelO b]
+            leftAndRightNodes (LevelO (Node a _ b))     = [LevelO b, LevelO a]
 
 
-inorderTree = Node Nil 2 (Node (Node Nil 4 Nil) 3 (Node Nil 5 Nil))
+inorderTree = Node (Node (Node Nil 4 Nil) 2 (Node Nil 5 Nil)) 1 (Node Nil 3 Nil)
 preorderTree = PreO (inorderTree)
 postorderTree = PostO (inorderTree)
 levelorderTree = LevelO (inorderTree)
